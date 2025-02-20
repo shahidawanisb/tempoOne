@@ -1,6 +1,9 @@
+"use client";
+
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   BookOpen,
@@ -103,10 +106,10 @@ const Sidebar = ({ className = "", userRole = "student" }: SidebarProps) => {
                   className="w-full justify-start gap-2"
                   asChild
                 >
-                  <a href={item.href}>
+                  <Link href={item.href}>
                     {item.icon}
                     {item.label}
-                  </a>
+                  </Link>
                 </Button>
               ))}
             </div>

@@ -1,9 +1,9 @@
+"use client";
+
 import React, { useState } from "react";
-import Sidebar from "./layout/Sidebar";
-import TopBar from "./layout/TopBar";
-import StatusOverview from "./dashboard/StatusOverview";
-import CourseGrid from "./courses/CourseGrid";
-import EnrollmentModal from "./enrollment/EnrollmentModal";
+import StatusOverview from "@/components/dashboard/StatusOverview";
+import CourseGrid from "@/components/courses/CourseGrid";
+import EnrollmentModal from "@/components/enrollment/EnrollmentModal";
 
 interface HomeProps {
   userRole?: "admin" | "student" | "instructor";
@@ -41,42 +41,27 @@ const Home = ({
   };
 
   return (
-    <div className="flex h-screen bg-background">
-      <Sidebar userRole={userRole} />
-      <div className="flex-1 flex flex-col">
-        <TopBar
-          currentProfile={currentProfile}
-          profiles={[
-            currentProfile,
-            {
-              id: "2",
-              name: "John Doe (Instructor)",
-              role: "Instructor",
-              avatarUrl:
-                "https://api.dicebear.com/7.x/avataaars/svg?seed=John2",
-            },
-          ]}
-        />
-        <main className="flex-1 overflow-auto p-6 space-y-6">
-          <StatusOverview
-            totalCreditHours={120}
-            earnedCreditHours={45}
-            upcomingDeadlines={[
-              {
-                courseName: "React Fundamentals",
-                daysRemaining: 5,
-                type: "enrollment",
-              },
-              {
-                courseName: "Advanced JavaScript",
-                daysRemaining: 12,
-                type: "completion",
-              },
-            ]}
-          />
-          <CourseGrid onEnroll={handleEnrollClick} />
-        </main>
-      </div>
+    <div className="space-y-6 p-6">
+      <h1 className="text-3xl font-bold">
+        Welcome Back, {currentProfile.name}
+      </h1>
+      <StatusOverview
+        totalCreditHours={120}
+        earnedCreditHours={45}
+        upcomingDeadlines={[
+          {
+            courseName: "React Fundamentals",
+            daysRemaining: 5,
+            type: "enrollment",
+          },
+          {
+            courseName: "Advanced JavaScript",
+            daysRemaining: 12,
+            type: "completion",
+          },
+        ]}
+      />
+      <CourseGrid onEnroll={handleEnrollClick} />
 
       <EnrollmentModal
         open={isEnrollmentModalOpen}
